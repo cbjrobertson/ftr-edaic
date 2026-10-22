@@ -1,0 +1,82 @@
+[project]
+name = "edaic-ftr"
+version = "0.1.0"
+description = "Minimal, pinned environment to run src/ftr_classification.ipynb"
+requires-python = "==3.9.*"
+readme = "README.md"
+
+dependencies = [
+    # core
+    "numpy==1.22.3",
+    "pandas==1.4.4",
+    "tqdm==4.64.1",
+
+    # spaCy + transformer pipeline (en_core_web_trf) used for sentencizing
+    "spacy==3.4.3",
+    "spacy-legacy==3.0.10",
+    "spacy-loggers==1.0.3",
+    "spacy-alignments==0.8.6",
+    "spacy-transformers==1.1.8",
+    "thinc==8.1.5",
+    "srsly==2.4.3",
+    "catalogue==2.0.8",
+    "wasabi==0.10.0",
+    "murmurhash==1.0.7",
+    "cymem==2.0.6",
+    "preshed==3.0.6",
+    "blis==0.7.9",
+    "langcodes==3.3.0",
+    "pathy==0.6.2",
+    "smart-open==5.2.1",
+    "typer==0.4.2",
+    # the conda env had pydantic==1.8.2, but that version crashes spaCy's import
+    # (TypeError in ModelField._type_analysis) on current Python 3.9 patch releases.
+    "pydantic>=1.9,<2",
+
+    # setuptools>=81 dropped pkg_resources, which spaCy's CLI still imports.
+    "setuptools<81",
+
+    # HF stack pulled in by spacy-transformers / en_core_web_trf
+    "transformers==4.9.2",
+    # transformers==4.9.2 requires huggingface-hub==0.0.12 exactly (old API,
+    # e.g. HfFolder/Repository). Do NOT install spacy-huggingface-hub or any
+    # modern huggingface_hub alongside this — it breaks spaCy's CLI bootstrap
+    # and transformers' imports. Only needed transiently (uninstalled after)
+    # to publish a model to the Hub; see README.
+    "huggingface-hub==0.0.12",
+    "tokenizers==0.10.3",
+    "sacremoses==0.0.53",
+    "regex==2022.9.13",
+    "torch==1.13.0",
+    # thinc's GPU backend (distinct from torch) -- needed for spacy.require_gpu().
+    # The conda env had conda-forge `cupy` (self-contained, bundled its own CUDA
+    # runtime). pip's cupy-cudaXXX wheels are NOT self-contained -- they dlopen
+    # system-installed CUDA libs by bare filename. cupy-cuda11x failed here
+    # because only a stray cuDNN install (no cudart/cublas/cufft/etc.) exists
+    # under /usr/local/cuda-11.7; the complete toolkit on this machine is 12.x
+    # (registered in ldconfig), so cupy-cuda12x is what actually works. torch
+    # stays on its own bundled cu117 runtime regardless -- the two don't need
+    # to match CUDA major versions, they're independent GPU contexts.
+    "cupy-cuda12x==13.6.0",
+
+    # spaCy language models (used by ftr_classifier.models at import time)
+    "en_core_web_trf @ https://github.com/explosion/spacy-models/releases/download/en_core_web_trf-3.4.1/en_core_web_trf-3.4.1-py3-none-any.whl",
+    "en_core_web_sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.4.1/en_core_web_sm-3.4.1-py3-none-any.whl",
+    "de_core_news_sm @ https://github.com/explosion/spacy-models/releases/download/de_core_news_sm-3.4.0/de_core_news_sm-3.4.0-py3-none-any.whl",
+    "nl_core_news_sm @ https://github.com/explosion/spacy-models/releases/download/nl_core_news_sm-3.4.0/nl_core_news_sm-3.4.0-py3-none-any.whl",
+
+    # FTR roberta textcat model, hosted on the Hub
+    "en_ftr_model_roberta @ https://huggingface.co/colerobertson/en_ftr_model_roberta/resolve/main/en_ftr_model_roberta-1.0.0-py3-none-any.whl",
+
+    # published to PyPI; no longer installed from the vendored ftr_classifier/ checkout
+    "ftr_classifier==1.3.0",
+]
+
+[project.optional-dependencies]
+notebook = [
+    "ipykernel==6.15.2",
+]
+
+[build-system]
+requires = ["setuptools>=65"]
+build-backend = "setuptools.build_meta"

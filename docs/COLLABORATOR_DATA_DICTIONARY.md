@@ -1,0 +1,166 @@
+# E-DAIC consolidated feature set — data dictionary
+
+275 participants × 156 columns. Index = Participant_ID.
+
+**Provenance.** E-DAIC (Extended DAIC-WOZ / AVEC-2019), USC ICT. Consolidated per-participant feature set from the Carney frame/norm depression analysis (2026). Norms: extrapolated multilingual norm DB (valence/arousal/dominance + Lancaster sensorimotor + concreteness/imageability/semantic_size), content-words-only. Frames: English texture-frames parser (DeBERTa-v3). Syntax/tense: spaCy en_core_web_sm dependency parse. Horizons: curated relative-temporal-expression extractor (SUTime-lite construct).
+
+**Caveats.** NON-REDISTRIBUTABLE E-DAIC data — authorised collaborators only. Participants 485 & 486 have PHQ-8 item rows swapped between the two source label files (exclude/verify). PHQ8_binary is NOT PHQ8_total>=10 (stricter, ~>=11; use total for severity, binary for diagnosis-style grouping). All sessions English (is_english=True). Transcripts are ASR (unpunctuated) → dependency parse / tense / horizon features are noisy proxies; all effects exploratory.
+
+## Columns
+
+- `split` — [base merge] original E-DAIC transcript/metadata/clinical field  _(dtype object)_
+- `gender` — [base merge] original E-DAIC transcript/metadata/clinical field  _(dtype object)_
+- `age` — [base merge] original E-DAIC transcript/metadata/clinical field  _(dtype int64)_
+- `language` — [base merge] original E-DAIC transcript/metadata/clinical field  _(dtype object)_
+- `is_english` — [base merge] original E-DAIC transcript/metadata/clinical field  _(dtype bool)_
+- `en_token_ratio` — [base merge] original E-DAIC transcript/metadata/clinical field  _(dtype float64)_
+- `es_token_ratio` — [base merge] original E-DAIC transcript/metadata/clinical field  _(dtype float64)_
+- `transcript_text` — [base merge] original E-DAIC transcript/metadata/clinical field  _(dtype object)_
+- `n_utterances` — [base merge] original E-DAIC transcript/metadata/clinical field  _(dtype int64)_
+- `n_words` — [base merge] original E-DAIC transcript/metadata/clinical field  _(dtype int64)_
+- `duration_s` — [base merge] original E-DAIC transcript/metadata/clinical field  _(dtype float64)_
+- `mean_confidence` — [base merge] original E-DAIC transcript/metadata/clinical field  _(dtype float64)_
+- `PHQ8_1_NoInterest` — [base merge] original E-DAIC transcript/metadata/clinical field  _(dtype int64)_
+- `PHQ8_2_Depressed` — [base merge] original E-DAIC transcript/metadata/clinical field  _(dtype int64)_
+- `PHQ8_3_Sleep` — [base merge] original E-DAIC transcript/metadata/clinical field  _(dtype int64)_
+- `PHQ8_4_Tired` — [base merge] original E-DAIC transcript/metadata/clinical field  _(dtype int64)_
+- `PHQ8_5_Appetite` — [base merge] original E-DAIC transcript/metadata/clinical field  _(dtype int64)_
+- `PHQ8_6_Failure` — [base merge] original E-DAIC transcript/metadata/clinical field  _(dtype int64)_
+- `PHQ8_7_Concentration` — [base merge] original E-DAIC transcript/metadata/clinical field  _(dtype int64)_
+- `PHQ8_8_Psychomotor` — [base merge] original E-DAIC transcript/metadata/clinical field  _(dtype int64)_
+- `PHQ8_total` — [base merge] original E-DAIC transcript/metadata/clinical field  _(dtype int64)_
+- `PHQ8_binary` — [base merge] original E-DAIC transcript/metadata/clinical field  _(dtype int64)_
+- `PTSD_severity` — [base merge] original E-DAIC transcript/metadata/clinical field  _(dtype float64)_
+- `PTSD_binary` — [base merge] original E-DAIC transcript/metadata/clinical field  _(dtype int64)_
+- `PCL-C_1_Memories` — [base merge] original E-DAIC transcript/metadata/clinical field  _(dtype int64)_
+- `PCL-C_2_Dreams` — [base merge] original E-DAIC transcript/metadata/clinical field  _(dtype int64)_
+- `PCL-C_3_Reliving` — [base merge] original E-DAIC transcript/metadata/clinical field  _(dtype int64)_
+- `PCL-C_4_Upset` — [base merge] original E-DAIC transcript/metadata/clinical field  _(dtype int64)_
+- `PCL-C_5_Physical` — [base merge] original E-DAIC transcript/metadata/clinical field  _(dtype int64)_
+- `PCL-C_6_ThoughtAvoidance` — [base merge] original E-DAIC transcript/metadata/clinical field  _(dtype int64)_
+- `PCL-C_7_ActivityAvoidance` — [base merge] original E-DAIC transcript/metadata/clinical field  _(dtype int64)_
+- `PCL-C_8_TroubleRemembering` — [base merge] original E-DAIC transcript/metadata/clinical field  _(dtype int64)_
+- `PCL-C_9_NoInterest` — [base merge] original E-DAIC transcript/metadata/clinical field  _(dtype int64)_
+- `PCL-C_10_FeelDistant` — [base merge] original E-DAIC transcript/metadata/clinical field  _(dtype int64)_
+- `PCL-C_11_FeelNumb` — [base merge] original E-DAIC transcript/metadata/clinical field  _(dtype int64)_
+- `PCL-C_12_Future_Cut_Short` — [base merge] original E-DAIC transcript/metadata/clinical field  _(dtype int64)_
+- `PCL-C_13_Sleep` — [base merge] original E-DAIC transcript/metadata/clinical field  _(dtype int64)_
+- `PCL-C_14_Irritability` — [base merge] original E-DAIC transcript/metadata/clinical field  _(dtype int64)_
+- `PCL-C_15_Concentration` — [base merge] original E-DAIC transcript/metadata/clinical field  _(dtype int64)_
+- `PCL-C_16_HyperAlert` — [base merge] original E-DAIC transcript/metadata/clinical field  _(dtype int64)_
+- `PCL-C_17_Jumpy` — [base merge] original E-DAIC transcript/metadata/clinical field  _(dtype int64)_
+- `utterances` — [base merge] original E-DAIC transcript/metadata/clinical field  _(dtype object)_
+- `norm_mean_valence` — [edaic_norm_scores_content.pkl] valence  _(dtype float64)_
+- `norm_mean_arousal` — [edaic_norm_scores_content.pkl] arousal  _(dtype float64)_
+- `norm_mean_dominance` — [edaic_norm_scores_content.pkl] dominance  _(dtype float64)_
+- `norm_mean_auditory` — [edaic_norm_scores_content.pkl] auditory  _(dtype float64)_
+- `norm_mean_gustatory` — [edaic_norm_scores_content.pkl] gustatory  _(dtype float64)_
+- `norm_mean_haptic` — [edaic_norm_scores_content.pkl] haptic  _(dtype float64)_
+- `norm_mean_interoceptive` — [edaic_norm_scores_content.pkl] interoceptive  _(dtype float64)_
+- `norm_mean_olfactory` — [edaic_norm_scores_content.pkl] olfactory  _(dtype float64)_
+- `norm_mean_visual` — [edaic_norm_scores_content.pkl] visual  _(dtype float64)_
+- `norm_mean_foot_leg` — [edaic_norm_scores_content.pkl] foot_leg  _(dtype float64)_
+- `norm_mean_hand_arm` — [edaic_norm_scores_content.pkl] hand_arm  _(dtype float64)_
+- `norm_mean_head` — [edaic_norm_scores_content.pkl] head  _(dtype float64)_
+- `norm_mean_mouth` — [edaic_norm_scores_content.pkl] mouth  _(dtype float64)_
+- `norm_mean_torso` — [edaic_norm_scores_content.pkl] torso  _(dtype float64)_
+- `norm_mean_concreteness` — [edaic_norm_scores_content.pkl] concreteness  _(dtype float64)_
+- `norm_mean_imageability` — [edaic_norm_scores_content.pkl] imageability  _(dtype float64)_
+- `norm_mean_semantic_size` — [edaic_norm_scores_content.pkl] semantic_size  _(dtype float64)_
+- `norm_mean_n_matched_tokens` — [edaic_norm_scores_content.pkl] n_matched_tokens  _(dtype float64)_
+- `norm_mean_n_tokens` — [edaic_norm_scores_content.pkl] n_tokens  _(dtype float64)_
+- `norm_mean_n_matched` — [edaic_norm_scores_content.pkl] n_matched  _(dtype float64)_
+- `norm_mean_coverage` — [edaic_norm_scores_content.pkl] coverage  _(dtype float64)_
+- `norm_sd_valence` — [edaic_norm_sds_compounds.pkl] valence  _(dtype float32)_
+- `norm_sd_arousal` — [edaic_norm_sds_compounds.pkl] arousal  _(dtype float32)_
+- `norm_sd_dominance` — [edaic_norm_sds_compounds.pkl] dominance  _(dtype float32)_
+- `norm_sd_auditory` — [edaic_norm_sds_compounds.pkl] auditory  _(dtype float32)_
+- `norm_sd_gustatory` — [edaic_norm_sds_compounds.pkl] gustatory  _(dtype float32)_
+- `norm_sd_haptic` — [edaic_norm_sds_compounds.pkl] haptic  _(dtype float32)_
+- `norm_sd_interoceptive` — [edaic_norm_sds_compounds.pkl] interoceptive  _(dtype float32)_
+- `norm_sd_olfactory` — [edaic_norm_sds_compounds.pkl] olfactory  _(dtype float32)_
+- `norm_sd_visual` — [edaic_norm_sds_compounds.pkl] visual  _(dtype float32)_
+- `norm_sd_foot_leg` — [edaic_norm_sds_compounds.pkl] foot_leg  _(dtype float32)_
+- `norm_sd_hand_arm` — [edaic_norm_sds_compounds.pkl] hand_arm  _(dtype float32)_
+- `norm_sd_head` — [edaic_norm_sds_compounds.pkl] head  _(dtype float32)_
+- `norm_sd_mouth` — [edaic_norm_sds_compounds.pkl] mouth  _(dtype float32)_
+- `norm_sd_torso` — [edaic_norm_sds_compounds.pkl] torso  _(dtype float32)_
+- `norm_sd_concreteness` — [edaic_norm_sds_compounds.pkl] concreteness  _(dtype float32)_
+- `norm_sd_imageability` — [edaic_norm_sds_compounds.pkl] imageability  _(dtype float32)_
+- `norm_sd_semantic_size` — [edaic_norm_sds_compounds.pkl] semantic_size  _(dtype float32)_
+- `norm_sd_perceptual_mean` — [edaic_norm_sds_compounds.pkl] perceptual_mean  _(dtype float32)_
+- `norm_sd_perceptual_max` — [edaic_norm_sds_compounds.pkl] perceptual_max  _(dtype float32)_
+- `norm_sd_action_mean` — [edaic_norm_sds_compounds.pkl] action_mean  _(dtype float32)_
+- `norm_sd_action_max` — [edaic_norm_sds_compounds.pkl] action_max  _(dtype float32)_
+- `norm_sd_sensorimotor_mean` — [edaic_norm_sds_compounds.pkl] sensorimotor_mean  _(dtype float32)_
+- `norm_sd_perceptual_minus_action` — [edaic_norm_sds_compounds.pkl] perceptual_minus_action  _(dtype float32)_
+- `lanc_perc_max` — [edaic_lancaster_compounds.pkl] perc_max  _(dtype float64)_
+- `lanc_perc_minkowski` — [edaic_lancaster_compounds.pkl] perc_minkowski  _(dtype float64)_
+- `lanc_perc_exclusivity` — [edaic_lancaster_compounds.pkl] perc_exclusivity  _(dtype float64)_
+- `lanc_act_max` — [edaic_lancaster_compounds.pkl] act_max  _(dtype float64)_
+- `lanc_act_minkowski` — [edaic_lancaster_compounds.pkl] act_minkowski  _(dtype float64)_
+- `lanc_act_exclusivity` — [edaic_lancaster_compounds.pkl] act_exclusivity  _(dtype float64)_
+- `lanc_percept_vs_action` — [edaic_lancaster_compounds.pkl] percept_vs_action  _(dtype float64)_
+- `content_lemmas` — list of content-word lemmas (stopwords removed, simplemma-lemmatised)  _(dtype object)_
+- `content_text` — content_lemmas joined by spaces (text-minus-stopwords)  _(dtype object)_
+- `n_content_tokens` — number of content-word tokens  _(dtype int64)_
+- `frame_counts` — dict frame->count (all 537 frames)  _(dtype object)_
+- `frame_trigger_counts` — nested dict frame->{trigger_lemma->count} (realised triggers)  _(dtype object)_
+- `role_counts` — dict FrameNet-role->count (aggregate)  _(dtype object)_
+- `n_triggers` — total frame triggers parsed  _(dtype int64)_
+- `frame_rates_all` — Series of all 537 frame rates per 1k words  _(dtype object)_
+- `cluster59_rates` — Series of 59-family FrameNet-Louvain cluster rates /1k  _(dtype object)_
+- `cluster46_rates` — Series of 46-cluster (reduced, res=0.35) rates /1k  _(dtype object)_
+- `frate_Desiring` — rate/1k of FrameNet frame Desiring (FTR/bouletic/modal-relevant)  _(dtype float64)_
+- `frate_Desirability` — rate/1k of FrameNet frame Desirability (FTR/bouletic/modal-relevant)  _(dtype float64)_
+- `frate_Purpose` — rate/1k of FrameNet frame Purpose (FTR/bouletic/modal-relevant)  _(dtype float64)_
+- `frate_Certainty` — rate/1k of FrameNet frame Certainty (FTR/bouletic/modal-relevant)  _(dtype float64)_
+- `frate_Likelihood` — rate/1k of FrameNet frame Likelihood (FTR/bouletic/modal-relevant)  _(dtype float64)_
+- `frate_Possibility` — rate/1k of FrameNet frame Possibility (FTR/bouletic/modal-relevant)  _(dtype float64)_
+- `frate_Capability` — rate/1k of FrameNet frame Capability (FTR/bouletic/modal-relevant)  _(dtype float64)_
+- `frate_Being_obligated` — rate/1k of FrameNet frame Being_obligated (FTR/bouletic/modal-relevant)  _(dtype float64)_
+- `frate_Being_necessary` — rate/1k of FrameNet frame Being_necessary (FTR/bouletic/modal-relevant)  _(dtype float64)_
+- `frate_Frequency` — rate/1k of FrameNet frame Frequency (FTR/bouletic/modal-relevant)  _(dtype float64)_
+- `frate_Time_vector` — rate/1k of FrameNet frame Time_vector (FTR/bouletic/modal-relevant)  _(dtype float64)_
+- `frate_Relative_time` — rate/1k of FrameNet frame Relative_time (FTR/bouletic/modal-relevant)  _(dtype float64)_
+- `frate_Calendric_unit` — rate/1k of FrameNet frame Calendric_unit (FTR/bouletic/modal-relevant)  _(dtype float64)_
+- `frate_Measure_duration` — rate/1k of FrameNet frame Measure_duration (FTR/bouletic/modal-relevant)  _(dtype float64)_
+- `frate_Predicament` — rate/1k of FrameNet frame Predicament (FTR/bouletic/modal-relevant)  _(dtype float64)_
+- `frate_Catastrophe` — rate/1k of FrameNet frame Catastrophe (FTR/bouletic/modal-relevant)  _(dtype float64)_
+- `frate_Preventing_or_letting` — rate/1k of FrameNet frame Preventing_or_letting (FTR/bouletic/modal-relevant)  _(dtype float64)_
+- `frate_Waiting` — rate/1k of FrameNet frame Waiting (FTR/bouletic/modal-relevant)  _(dtype float64)_
+- `frate_Expectation` — rate/1k of FrameNet frame Expectation (FTR/bouletic/modal-relevant)  _(dtype float64)_
+- `agency_agentive_rate` — [edaic_agency_frames.csv] agentive_rate  _(dtype float64)_
+- `agency_experiencer_rate` — [edaic_agency_frames.csv] experiencer_rate  _(dtype float64)_
+- `agency_patient_rate` — [edaic_agency_frames.csv] patient_rate  _(dtype float64)_
+- `agency_passive_rate` — [edaic_agency_frames.csv] passive_rate  _(dtype float64)_
+- `agency_passive_frac` — [edaic_agency_frames.csv] passive_frac  _(dtype float64)_
+- `agency_role_undergoer_frac` — [edaic_agency_frames.csv] role_undergoer_frac  _(dtype float64)_
+- `syn_self_undergoer_ratio` — [edaic_syntactic_agency.csv] self_undergoer_ratio  _(dtype float64)_
+- `syn_passive_rate` — [edaic_syntactic_agency.csv] passive_rate  _(dtype float64)_
+- `syn_possibility_rate` — [edaic_syntactic_agency.csv] possibility_rate  _(dtype float64)_
+- `syn_neg_possibility_rate` — [edaic_syntactic_agency.csv] neg_possibility_rate  _(dtype float64)_
+- `syn_fp_singular_rate` — [edaic_syntactic_agency.csv] fp_singular_rate  _(dtype float64)_
+- `syn_negation_rate` — [edaic_syntactic_agency.csv] negation_rate  _(dtype float64)_
+- `syn__n_selfdep` — [edaic_syntactic_agency.csv] _n_selfdep  _(dtype float64)_
+- `fut_future_rate` — future-time markers (will/'ll/shall/gonna/going to/about to) per 1k words  _(dtype float64)_
+- `mod_possibility_rate` — epistemic possibility (might/may/could/maybe/perhaps/possibly/possible) per 1k  _(dtype float64)_
+- `mod_ability_rate` — ability modals (can/could/able) per 1k  _(dtype float64)_
+- `mod_ability_neg_rate` — negated ability (can't/cannot/couldn't/unable) per 1k  _(dtype float64)_
+- `mod_necessity_rate` — necessity/deontic (must/should/ought/need/have to/got to) per 1k  _(dtype float64)_
+- `prob_high_rate` — high-probability adverbs (definitely/certainly/surely/obviously…) per 1k  _(dtype float64)_
+- `prob_low_rate` — hedging/low-probability (maybe/perhaps/probably/likely + i guess/i think…) per 1k  _(dtype float64)_
+- `boul_desire_rate` — bouletic/desire (want/wish/hope/desire/crave/yearn…) per 1k  _(dtype float64)_
+- `boul_counterfactual_rate` — counterfactual desire/regret (wish/if only/would-should-could have) per 1k  _(dtype float64)_
+- `cond_conditional_rate` — conditional markers (if/unless/whether) per 1k  _(dtype float64)_
+- `neg_negation_rate` — negation (not/no/never/nothing/n't…) per 1k  _(dtype float64)_
+- `ftr_n_temporal` — count of resolvable temporal expressions (ago/in-N/last/next/yesterday…)  _(dtype float64)_
+- `ftr_temporal_rate_1k` — temporal expressions per 1k words  _(dtype float64)_
+- `ftr_mean_log_horizon` — mean log|days| of temporal distance from 'now' (SUTime-lite construct)  _(dtype float64)_
+- `ftr_median_abs_days` — median |days| temporal distance  _(dtype float64)_
+- `ftr_future_frac` — fraction of temporal expressions pointing to the FUTURE (vs past)  _(dtype float64)_
+- `ftr_n_future` — count future-pointing temporal expressions  _(dtype float64)_
+- `ftr_n_past` — count past-pointing temporal expressions  _(dtype float64)_
+- `tense_past_rate` — finite past-tense verbs per finite verb  _(dtype float64)_
+- `tense_pres_rate` — finite present-tense verbs per finite verb  _(dtype float64)_
+- `tense_n_finite` — number of tense-marked finite verbs  _(dtype float64)_
